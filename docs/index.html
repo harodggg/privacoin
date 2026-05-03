@@ -1,437 +1,339 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>郭宏杰 · 个人小传</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --ink: #2c2c2c;
-            --ink-light: #5a5a5a;
-            --cinnabar: #b22222;
-            --gold: #c8a84e;
-            --paper: #f5f0e8;
-            --paper-dark: #e8e0d0;
-            --silk: #faf5ed;
-        }
-
-        body {
-            font-family: 'Noto Serif SC', 'ZCOOL XiaoWei', 'STSong', serif;
-            background: var(--paper);
-            color: var(--ink);
-            line-height: 1.9;
-            overflow-x: hidden;
-        }
-
-        /* ---- 水墨 Hero ---- */
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(178,34,34,0.04) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(200,168,78,0.06) 0%, transparent 50%),
-                linear-gradient(180deg, #f5f0e8 0%, #f0e8d8 100%);
-        }
-
-        /* 水墨山背景 */
-        .mountain-bg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 300px;
-            opacity: 0.12;
-            pointer-events: none;
-        }
-        .mountain-bg svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .hero * { position: relative; z-index: 1; }
-
-        /* 印章效果 */
-        .seal {
-            width: 90px;
-            height: 90px;
-            border: 3px solid var(--cinnabar);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'ZCOOL XiaoWei', serif;
-            font-size: 1.8rem;
-            color: var(--cinnabar);
-            margin-bottom: 2rem;
-            transform: rotate(-3deg);
-            box-shadow: 2px 2px 0 rgba(178,34,34,0.1);
-            background: rgba(178,34,34,0.03);
-            letter-spacing: 0.1em;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.6rem, 7vw, 4.5rem);
-            font-weight: 900;
-            letter-spacing: 0.25em;
-            color: var(--ink);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .hero .subtitle {
-            font-size: 1.1rem;
-            color: var(--ink-light);
-            margin-top: 1rem;
-            letter-spacing: 0.4em;
-            font-weight: 400;
-        }
-
-        .hero .divider-line {
-            width: 60px;
-            height: 2px;
-            background: var(--cinnabar);
-            margin: 1.8rem auto;
-            opacity: 0.6;
-        }
-
-        .hero .poem {
-            font-size: 0.95rem;
-            color: var(--ink-light);
-            line-height: 2.2;
-            letter-spacing: 0.15em;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-
-        .scroll-hint {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: var(--ink-light);
-            opacity: 0.4;
-            letter-spacing: 0.3em;
-            animation: float 2.5s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-
-        /* ---- 通用 ---- */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        /* 章节标题 */
-        section {
-            margin-bottom: 4rem;
-            position: relative;
-        }
-        .section-title {
-            display: flex;
-            align-items: baseline;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        .section-title .cn {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.3em;
-            color: var(--ink);
-        }
-        .section-title .en {
-            font-size: 0.75rem;
-            color: var(--ink-light);
-            opacity: 0.4;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--ink), transparent);
-            opacity: 0.15;
-        }
-
-        /* 关于我 —— 竖排版味道 */
-        .about-text {
-            font-size: 1.05rem;
-            color: var(--ink-light);
-            line-height: 2;
-            padding: 1.5rem 0;
-            border-top: 1px solid rgba(44,44,44,0.08);
-            border-bottom: 1px solid rgba(44,44,44,0.08);
-        }
-        .about-text strong {
-            color: var(--cinnabar);
-            font-weight: 700;
-        }
-
-        /* 技能 —— 水墨卡片 */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 1.2rem;
-        }
-        .skill-card {
-            background: var(--silk);
-            border: 1px solid rgba(44,44,44,0.08);
-            border-radius: 4px;
-            padding: 1.2rem 0.8rem;
-            text-align: center;
-            font-weight: 500;
-            font-size: 0.95rem;
-            letter-spacing: 0.1em;
-            transition: all 0.3s;
-            cursor: default;
-            color: var(--ink-light);
-            position: relative;
-        }
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: var(--cinnabar);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .skill-card:hover {
-            border-color: var(--cinnabar);
-            color: var(--cinnabar);
-            transform: translateY(-2px);
-        }
-        .skill-card:hover::before {
-            opacity: 1;
-        }
-
-        /* 项目 —— 卷轴卡片 */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.8rem;
-        }
-        .project-card {
-            background: var(--silk);
-            border: 1px solid rgba(44,44,44,0.08);
-            border-radius: 4px;
-            padding: 1.8rem;
-            transition: all 0.3s;
-            position: relative;
-        }
-        .project-card:hover {
-            border-color: rgba(178,34,34,0.3);
-            background: #f8f3ec;
-        }
-        .project-card .corner {
-            position: absolute;
-            top: 0; right: 0;
-            width: 24px;
-            height: 24px;
-            border-top: 2px solid var(--cinnabar);
-            border-right: 2px solid var(--cinnabar);
-            opacity: 0.3;
-        }
-        .project-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.6rem;
-            color: var(--ink);
-        }
-        .project-card p {
-            font-size: 0.9rem;
-            color: var(--ink-light);
-            line-height: 1.8;
-        }
-        .project-card .tags {
-            margin-top: 1rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-        .project-card .tags span {
-            font-size: 0.75rem;
-            color: var(--cinnabar);
-            background: rgba(178,34,34,0.06);
-            padding: 0.15rem 0.7rem;
-            border-radius: 2px;
-            letter-spacing: 0.05em;
-        }
-
-        /* 联系 */
-        .contact-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .contact-grid a {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1.2rem;
-            border: 1px solid rgba(44,44,44,0.12);
-            border-radius: 4px;
-            color: var(--ink-light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 0.05em;
-            transition: all 0.3s;
-            background: var(--silk);
-        }
-        .contact-grid a:hover {
-            border-color: var(--cinnabar);
-            color: var(--cinnabar);
-            background: rgba(178,34,34,0.03);
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            font-size: 0.8rem;
-            color: var(--ink-light);
-            opacity: 0.5;
-            letter-spacing: 0.3em;
-            border-top: 1px solid rgba(44,44,44,0.06);
-        }
-
-        /* 竹叶装饰 */
-        .bamboo-leaf {
-            position: fixed;
-            opacity: 0.06;
-            pointer-events: none;
-            font-size: 6rem;
-            z-index: 0;
-        }
-        .b-leaf-1 { top: 15%; left: 3%; transform: rotate(-20deg); }
-        .b-leaf-2 { bottom: 20%; right: 2%; transform: rotate(150deg) scaleX(-1); }
-        .b-leaf-3 { top: 50%; right: 5%; transform: rotate(80deg); opacity: 0.04; }
-
-        @media (max-width: 500px) {
-            .container { padding: 2.5rem 1.2rem; }
-            .skills-grid { grid-template-columns: repeat(3, 1fr); }
-            .projects-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacoin · 隐私币演示</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Noto Sans SC,sans-serif;background:#f5f0e8;color:#2c2c2c;padding:1rem;min-height:100vh}
+.container{max-width:960px;margin:0 auto}
+h1{text-align:center;font-size:1.8rem;margin-bottom:.3rem;letter-spacing:.15em;color:#b22222}
+.subtitle{text-align:center;color:#888;margin-bottom:1.5rem;font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem;margin-bottom:1rem}
+.card{background:#fff;border-radius:8px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.card h2{font-size:1rem;margin-bottom:.8rem;color:#b22222;border-bottom:1px solid #eee;padding-bottom:.5rem}
+.btn{background:#b22222;color:#fff;border:none;padding:.4rem 1rem;border-radius:6px;cursor:pointer;font-size:.85rem}
+.btn:hover{background:#8b1a1a}
+.btn.sm{padding:.25rem .6rem;font-size:.78rem}
+input,select{padding:.4rem .6rem;border:1px solid #ddd;border-radius:6px;font-size:.85rem;width:100%;margin-bottom:.4rem}
+label{font-size:.8rem;color:#666;display:block;margin-bottom:.2rem}
+table{width:100%;border-collapse:collapse;font-size:.8rem}
+th{text-align:left;padding:.4rem;border-bottom:2px solid #eee;color:#666;font-weight:600}
+td{padding:.4rem;border-bottom:1px solid #f0f0f0;font-family:monospace;font-size:.78rem;word-break:break-all}
+.status{display:inline-block;padding:.15rem .5rem;border-radius:4px;font-size:.72rem;font-weight:600}
+.status.ok{background:#e8f5e9;color:#2e7d32}
+.status.fail{background:#fbe9e7;color:#c62828}
+.mono{font-family:monospace;font-size:.8rem;color:#555}
+.log{padding:.3rem 0;border-bottom:1px solid #f0f0f0;font-size:.85rem}
+.notice{background:#fff8e1;border:1px solid #ffe082;border-radius:6px;padding:.6rem;margin-bottom:.8rem;font-size:.82rem;color:#795548}
+footer{text-align:center;color:#aaa;font-size:.75rem;margin-top:2rem;padding:1rem}
+</style>
 </head>
 <body>
-
-<!-- 竹叶装饰 -->
-<div class="bamboo-leaf b-leaf-1">🎋</div>
-<div class="bamboo-leaf b-leaf-2">🎋</div>
-<div class="bamboo-leaf b-leaf-3">🎋</div>
-
-<!-- Hero -->
-<section class="hero">
-    <!-- 水墨远山 -->
-    <div class="mountain-bg">
-        <svg viewBox="0 0 1440 300" preserveAspectRatio="xMinYMax meet">
-            <path d="M0,180 C200,120 320,200 480,140 C560,110 640,160 720,110 C800,60 880,130 960,90 C1040,50 1120,100 1200,70 C1280,40 1360,80 1440,60 L1440,300 L0,300 Z" fill="currentColor"/>
-            <path d="M0,220 C240,160 400,240 600,180 C720,145 840,200 960,150 C1060,110 1160,170 1260,130 C1340,100 1400,140 1440,120 L1440,300 L0,300 Z" fill="currentColor" opacity="0.6"/>
-        </svg>
-    </div>
-
-    <div class="seal">宏杰</div>
-    <h1>郭宏杰</h1>
-    <p class="subtitle">— 码上春秋 · 笔下乾坤 —</p>
-    <div class="divider-line"></div>
-    <div class="poem">
-        一入代码深似海<br>
-        万行文字写平生
-    </div>
-    <div class="scroll-hint">▼ 卷舒风云</div>
-</section>
-
 <div class="container">
 
-    <!-- 关于我 -->
-    <section>
-        <div class="section-title">
-            <span class="cn">自叙</span>
-            <span class="en">About</span>
-        </div>
-        <div class="about-text">
-            吾名 <strong>郭宏杰</strong>，一介码农，好技而笃行。<br>
-            以键盘为笔、屏幕为纸，于数字天地间耕耘不辍。<br>
-            嗜 Web 开发与效率工器，偶亦沉迷开源，以此为乐。
-        </div>
-    </section>
+<h1>🏛 Privacoin</h1>
+<p class="subtitle">隐私保护加密货币 · 纯前端演示 (灵感来自 Zcash)</p>
 
-    <!-- 技能 -->
-    <section>
-        <div class="section-title">
-            <span class="cn">所能</span>
-            <span class="en">Skills</span>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-card">React</div>
-            <div class="skill-card">Node.js</div>
-            <div class="skill-card">TypeScript</div>
-            <div class="skill-card">CSS / UI</div>
-            <div class="skill-card">Python</div>
-            <div class="skill-card">PostgreSQL</div>
-            <div class="skill-card">Docker</div>
-            <div class="skill-card">Vercel</div>
-        </div>
-    </section>
+<div class="notice">⚠️ 纯 JavaScript 实现，所有数据存在浏览器内存中，刷新即清零。</div>
 
-    <!-- 项目 -->
-    <section>
-        <div class="section-title">
-            <span class="cn">拙作</span>
-            <span class="en">Projects</span>
-        </div>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="corner"></div>
-                <h3>◈ 某项目</h3>
-                <p>此乃一小小工具，虽不足道，然尽心矣。</p>
-                <div class="tags"><span>React</span><span>Node</span><span>Mongo</span></div>
-            </div>
-            <div class="project-card">
-                <div class="corner"></div>
-                <h3>◈ 又一作</h3>
-                <p>集诸技之长，成一体之用，聊以自娱。</p>
-                <div class="tags"><span>Python</span><span>FastAPI</span><span>PG</span></div>
-            </div>
-            <div class="project-card">
-                <div class="corner"></div>
-                <h3>◈ 闲余之创</h3>
-                <p>闲暇时光所铸，志在精而不在多。</p>
-                <div class="tags"><span>TS</span><span>Next.js</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 联系 -->
-    <section>
-        <div class="section-title">
-            <span class="cn">投书</span>
-            <span class="en">Contact</span>
-        </div>
-        <div class="contact-grid">
-            <a href="#">✉ 电子信</a>
-            <a href="#">💬 微信</a>
-            <a href="#">🐦 飞鸟</a>
-            <a href="#">🐙 代码仓</a>
-        </div>
-    </section>
-
+<div class="grid">
+  <div class="card">
+    <h2>👤 创建钱包</h2>
+    <input id="walletName" placeholder="例: Alice" onkeydown="if(event.key==='Enter')createWallet()">
+    <button class="btn" onclick="createWallet()">创建</button>
+  </div>
+  <div class="card">
+    <h2>💰 铸币</h2>
+    <select id="mintOwner"><option value="">-- 选择 --</option></select>
+    <input id="mintValue" type="number" min="1" value="100">
+    <button class="btn" onclick="doMint()">铸造</button>
+  </div>
+  <div class="card">
+    <h2>📤 隐私转账</h2>
+    <select id="txFrom"><option value="">-- 发送方 --</option></select>
+    <select id="txTo"><option value="">-- 接收方 --</option></select>
+    <input id="txValue" type="number" min="1" value="10" placeholder="金额">
+    <button class="btn" onclick="doTransfer()">发送 🛡</button>
+  </div>
+  <div class="card">
+    <h2>📊 状态</h2>
+    <div id="statusDisplay"></div>
+    <button class="btn sm" style="margin-top:.5rem" onclick="refreshAll()">🔄 刷新</button>
+  </div>
 </div>
 
-<footer>
-    甲辰 · 以笔墨耕心
-</footer>
+<div class="card"><h2>👛 钱包 & 余额</h2><div id="walletList">加载中...</div></div>
+<div class="card"><h2>📜 链上 Note (承诺)</h2><div id="noteList">加载中...</div></div>
+<div class="card"><h2>📋 交易日志</h2><div id="txLog">暂无记录</div></div>
 
+<footer>🛡 Privacoin · 纯前端教学演示 · 数据不上传服务器</footer>
+</div>
+
+<script>
+// ====== 密码学工具 ======
+async function sha256(data) {
+  const buf = typeof data === 'string' ? new TextEncoder().encode(data) : data;
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return new Uint8Array(h);
+}
+
+function hex(b) {
+  return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('').slice(0,16)+'...';
+}
+function hexFull(b) {
+  return Array.from(b).map(x => x.toString(16).padStart(2,'0')).join('');
+}
+function randomBytes(n) {
+  return crypto.getRandomValues(new Uint8Array(n));
+}
+
+// ====== 核心数据结构 ======
+let ledger = { wallets: {}, notes: [], nullifiers: new Set(), tree: null };
+
+function initTree() {
+  const depth = 5;
+  const empty = new Uint8Array(32);
+  let leaves = new Array(1<<depth).fill(empty);
+  let nodes = [leaves.slice()];
+  for (let level = 1; level <= depth; level++) {
+    const prev = nodes[level-1];
+    const cur = [];
+    for (let i = 0; i < prev.length; i+=2) {
+      cur.push(null); // placeholder
+    }
+    nodes.push(cur);
+  }
+  return { depth, leaves, nodes, count: 0, emptyHash: empty };
+}
+
+function treeAddLeaf(tree, cm) {
+  if (tree.count >= tree.leaves.length) throw 'Tree full';
+  const idx = tree.count;
+  tree.leaves[idx] = cm;
+  tree.nodes[0][idx] = cm;
+  tree.count++;
+  // update path to root
+  let i = idx;
+  for (let level = 1; level <= tree.depth; level++) {
+    const parent = Math.floor(i/2);
+    const left = tree.nodes[level-1][parent*2];
+    const right = tree.nodes[level-1][parent*2+1];
+    const combined = new Uint8Array(64);
+    combined.set(left);
+    combined.set(right, 32);
+    // hash synchronously - we'll use a workaround
+    tree.nodes[level][parent] = combined; // placeholder, recalc later
+    i = parent;
+  }
+  return idx;
+}
+
+// For simplicity, we use a synchronous hash approach
+// SHA-256 in browser is async, so we pre-compute
+let _treeHashes = {};
+
+function computeTreeRoot(tree) {
+  // Recompute all internal nodes bottom-up
+  for (let level = 1; level <= tree.depth; level++) {
+    for (let i = 0; i < tree.nodes[level-1].length; i+=2) {
+      const left = tree.nodes[level-1][i];
+      const right = tree.nodes[level-1][i+1];
+      const parent = Math.floor(i/2);
+      tree.nodes[level][parent] = hashPair(left, right);
+    }
+  }
+}
+
+function hashPair(a, b) {
+  const combined = new Uint8Array(64);
+  combined.set(a);
+  combined.set(b, 32);
+  // We'll do sync hashing using a pre-computed approach
+  // For demo, we use a deterministic "hash"
+  let h = 0;
+  for (let i = 0; i < combined.length; i++) {
+    h = ((h << 5) - h + combined[i]) | 0;
+  }
+  const result = new Uint8Array(32);
+  for (let i = 0; i < 8; i++) {
+    result[i*4] = (h >> 24) & 0xff;
+    result[i*4+1] = (h >> 16) & 0xff;
+    result[i*4+2] = (h >> 8) & 0xff;
+    result[i*4+3] = h & 0xff;
+  }
+  return result;
+}
+
+// Note
+class Note {
+  constructor(value, owner) {
+    this.value = value;
+    this.owner = owner;
+    this.rho = randomBytes(32);
+    this.r = randomBytes(32);
+  }
+  commitment() {
+    const data = new Uint8Array(8 + 32 + 32 + 32);
+    const v = new Uint8Array(8);
+    for (let i = 0; i < 8; i++) v[7-i] = (this.value >> (i*8)) & 0xff;
+    data.set(v, 0);
+    data.set(this.owner, 8);
+    data.set(this.rho, 40);
+    data.set(this.r, 72);
+    // Simplified deterministic hash for demo
+    let h = this.value * 31;
+    for (let i = 0; i < 32; i++) h = ((h << 5) - h + this.owner[i]) | 0;
+    for (let i = 0; i < 32; i++) h = ((h << 5) - h + this.rho[i]) | 0;
+    const r = new Uint8Array(32);
+    for (let i = 0; i < 8; i++) {
+      r[i*4] = (h >> 24) & 0xff;
+      r[i*4+1] = (h >> 16) & 0xff;
+      r[i*4+2] = (h >> 8) & 0xff;
+      r[i*4+3] = h & 0xff;
+    }
+    return r;
+  }
+  nullifier() {
+    const data = new Uint8Array(64);
+    data.set(this.owner, 0);
+    data.set(this.rho, 32);
+    let h = 0;
+    for (let i = 0; i < 64; i++) h = ((h << 5) - h + data[i]) | 0;
+    const r = new Uint8Array(32);
+    for (let i = 0; i < 8; i++) {
+      r[i*4] = (h >> 24) & 0xff;
+      r[i*4+1] = (h >> 16) & 0xff;
+      r[i*4+2] = (h >> 8) & 0xff;
+      r[i*4+3] = h & 0xff;
+    }
+    return r;
+  }
+}
+
+// ====== 操作函数 ======
+function createWallet() {
+  const name = document.getElementById('walletName').value.trim();
+  if (!name) { log('❌', '请输入钱包名称'); return; }
+  if (ledger.wallets[name]) { log('❌', `'${name}' 已存在`); return; }
+  ledger.wallets[name] = { pkh: randomBytes(20) };
+  document.getElementById('walletName').value = '';
+  log('✅', `钱包 '${name}' 创建成功`);
+  refreshAll();
+}
+
+function doMint() {
+  const name = document.getElementById('mintOwner').value;
+  const value = parseInt(document.getElementById('mintValue').value);
+  if (!name || !ledger.wallets[name]) { log('❌', '请选择有效的钱包'); return; }
+  if (value <= 0) { log('❌', '金额须 > 0'); return; }
+  if (!ledger.tree) ledger.tree = initTree();
+  const note = new Note(value, ledger.wallets[name].pkh);
+  const cm = note.commitment();
+  treeAddLeaf(ledger.tree, cm);
+
+  if (!ledger.notes) ledger.notes = [];
+  ledger.notes.push({ note, cm, spent: false, owner: name });
+  log('✅', `为 ${name} 铸造 ${value} 聪`);
+  refreshAll();
+}
+
+function doTransfer() {
+  const from = document.getElementById('txFrom').value;
+  const to = document.getElementById('txTo').value;
+  const value = parseInt(document.getElementById('txValue').value);
+  if (!from || !ledger.wallets[from]) { log('❌', '选择发送方'); return; }
+  if (!to || !ledger.wallets[to]) { log('❌', '选择接收方'); return; }
+  if (from === to) { log('❌', '不能转给自己'); return; }
+  if (value <= 0) { log('❌', '金额须 > 0'); return; }
+
+  const spendable = ledger.notes.filter(n => n.owner === from && !n.spent);
+  if (spendable.length === 0) { log('❌', `${from} 没有可花的 Note`); return; }
+  const sel = spendable.find(n => n.note.value >= value);
+  if (!sel) { log('❌', `${from} 没有金额足够的 Note`); return; }
+
+  // Mark spent
+  sel.spent = true;
+  const nf = sel.note.nullifier();
+  ledger.nullifiers.add(hexFull(nf));
+
+  // Change
+  const changeVal = sel.note.value - value;
+  if (changeVal > 0) {
+    const changeNote = new Note(changeVal, ledger.wallets[from].pkh);
+    ledger.notes.push({ note: changeNote, cm: changeNote.commitment(), spent: false, owner: from });
+    treeAddLeaf(ledger.tree, changeNote.commitment());
+  }
+
+  // To recipient
+  const toNote = new Note(value, ledger.wallets[to].pkh);
+  ledger.notes.push({ note: toNote, cm: toNote.commitment(), spent: false, owner: to });
+  treeAddLeaf(ledger.tree, toNote.commitment());
+
+  let msg = `${from} → ${to} : ${value} 聪`;
+  if (changeVal > 0) msg += ` (找零 ${changeVal} 聪)`;
+  log('✅', msg);
+  refreshAll();
+}
+
+function log(icon, msg) {
+  const div = document.getElementById('txLog');
+  const el = document.createElement('div');
+  el.className = 'log';
+  el.innerHTML = `${icon} ${msg}`;
+  div.prepend(el);
+  if (div.children.length > 50) div.removeChild(div.lastChild);
+}
+
+function refreshAll() {
+  // Wallet selects
+  const names = Object.keys(ledger.wallets);
+  const selects = ['mintOwner','txFrom','txTo'];
+  selects.forEach(id => {
+    const sel = document.getElementById(id);
+    const cur = sel.value;
+    sel.innerHTML = '<option value="">-- 选择 --</option>';
+    names.forEach(n => {
+      const bal = ledger.notes.filter(x => x.owner === n && !x.spent).reduce((s,x) => s + x.note.value, 0);
+      const o = document.createElement('option');
+      o.value = n; o.textContent = `${n} (${bal} 聪)`;
+      sel.appendChild(o);
+    });
+    if (cur && names.includes(cur)) sel.value = cur;
+  });
+
+  // Wallet table
+  const wHtml = names.length
+    ? '<table><tr><th>名称</th><th>地址</th><th>余额</th></tr>' +
+      names.map(n => {
+        const bal = ledger.notes.filter(x => x.owner === n && !x.spent).reduce((s,x) => s + x.note.value, 0);
+        return `<tr><td><strong>${n}</strong></td><td class="mono">${hex(ledger.wallets[n].pkh)}</td><td><strong>${bal}</strong> 聪</td></tr>`;
+      }).join('') + '</table>'
+    : '<p class="mono">暂无钱包</p>';
+  document.getElementById('walletList').innerHTML = wHtml;
+
+  // Notes table
+  const notes = ledger.notes || [];
+  const nHtml = notes.length
+    ? '<table><tr><th>承诺</th><th>拥有者</th><th>金额</th><th>状态</th></tr>' +
+      notes.map(n => `<tr><td class="mono">${hex(n.cm)}</td><td>${n.owner}</td><td>${n.note.value} 聪</td><td>${
+        n.spent ? '<span class="status fail">已花</span>' : '<span class="status ok">未花</span>'
+      }</td></tr>`).join('') + '</table>'
+    : '<p class="mono">链上暂无 Note</p>';
+  document.getElementById('noteList').innerHTML = nHtml;
+
+  // Status
+  const treeRoot = ledger.tree ? hex(ledger.tree.leaves[0]) : '空';
+  document.getElementById('statusDisplay').innerHTML =
+    `<table><tr><td>钱包数</td><td><strong>${names.length}</strong></td></tr>` +
+    `<tr><td>链上承诺</td><td><strong>${notes.length}</strong></td></tr>` +
+    `<tr><td>已用 Nullifier</td><td><strong>${ledger.nullifiers.size}</strong></td></tr></table>`;
+}
+
+// Init
+ledger.tree = initTree();
+refreshAll();
+</script>
 </body>
 </html>
