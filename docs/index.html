@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>郭宏杰 · 个人小传</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #2c2c2c;
+            --ink-light: #5a5a5a;
+            --cinnabar: #b22222;
+            --gold: #c8a84e;
+            --paper: #f5f0e8;
+            --paper-dark: #e8e0d0;
+            --silk: #faf5ed;
+        }
+
+        body {
+            font-family: 'Noto Serif SC', 'ZCOOL XiaoWei', 'STSong', serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.9;
+            overflow-x: hidden;
+        }
+
+        /* ---- 水墨 Hero ---- */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(178,34,34,0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 30%, rgba(200,168,78,0.06) 0%, transparent 50%),
+                linear-gradient(180deg, #f5f0e8 0%, #f0e8d8 100%);
+        }
+
+        /* 水墨山背景 */
+        .mountain-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+        .mountain-bg svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero * { position: relative; z-index: 1; }
+
+        /* 印章效果 */
+        .seal {
+            width: 90px;
+            height: 90px;
+            border: 3px solid var(--cinnabar);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-size: 1.8rem;
+            color: var(--cinnabar);
+            margin-bottom: 2rem;
+            transform: rotate(-3deg);
+            box-shadow: 2px 2px 0 rgba(178,34,34,0.1);
+            background: rgba(178,34,34,0.03);
+            letter-spacing: 0.1em;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.6rem, 7vw, 4.5rem);
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            color: var(--ink);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .hero .subtitle {
+            font-size: 1.1rem;
+            color: var(--ink-light);
+            margin-top: 1rem;
+            letter-spacing: 0.4em;
+            font-weight: 400;
+        }
+
+        .hero .divider-line {
+            width: 60px;
+            height: 2px;
+            background: var(--cinnabar);
+            margin: 1.8rem auto;
+            opacity: 0.6;
+        }
+
+        .hero .poem {
+            font-size: 0.95rem;
+            color: var(--ink-light);
+            line-height: 2.2;
+            letter-spacing: 0.15em;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        .scroll-hint {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: var(--ink-light);
+            opacity: 0.4;
+            letter-spacing: 0.3em;
+            animation: float 2.5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        /* ---- 通用 ---- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* 章节标题 */
+        section {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        .section-title {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .section-title .cn {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            color: var(--ink);
+        }
+        .section-title .en {
+            font-size: 0.75rem;
+            color: var(--ink-light);
+            opacity: 0.4;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--ink), transparent);
+            opacity: 0.15;
+        }
+
+        /* 关于我 —— 竖排版味道 */
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--ink-light);
+            line-height: 2;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(44,44,44,0.08);
+            border-bottom: 1px solid rgba(44,44,44,0.08);
+        }
+        .about-text strong {
+            color: var(--cinnabar);
+            font-weight: 700;
+        }
+
+        /* 技能 —— 水墨卡片 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1.2rem;
+        }
+        .skill-card {
+            background: var(--silk);
+            border: 1px solid rgba(44,44,44,0.08);
+            border-radius: 4px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
+            cursor: default;
+            color: var(--ink-light);
+            position: relative;
+        }
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--cinnabar);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .skill-card:hover {
+            border-color: var(--cinnabar);
+            color: var(--cinnabar);
+            transform: translateY(-2px);
+        }
+        .skill-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 项目 —— 卷轴卡片 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+        .project-card {
+            background: var(--silk);
+            border: 1px solid rgba(44,44,44,0.08);
+            border-radius: 4px;
+            padding: 1.8rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .project-card:hover {
+            border-color: rgba(178,34,34,0.3);
+            background: #f8f3ec;
+        }
+        .project-card .corner {
+            position: absolute;
+            top: 0; right: 0;
+            width: 24px;
+            height: 24px;
+            border-top: 2px solid var(--cinnabar);
+            border-right: 2px solid var(--cinnabar);
+            opacity: 0.3;
+        }
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.6rem;
+            color: var(--ink);
+        }
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--ink-light);
+            line-height: 1.8;
+        }
+        .project-card .tags {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .project-card .tags span {
+            font-size: 0.75rem;
+            color: var(--cinnabar);
+            background: rgba(178,34,34,0.06);
+            padding: 0.15rem 0.7rem;
+            border-radius: 2px;
+            letter-spacing: 0.05em;
+        }
+
+        /* 联系 */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .contact-grid a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(44,44,44,0.12);
+            border-radius: 4px;
+            color: var(--ink-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+            background: var(--silk);
+        }
+        .contact-grid a:hover {
+            border-color: var(--cinnabar);
+            color: var(--cinnabar);
+            background: rgba(178,34,34,0.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.8rem;
+            color: var(--ink-light);
+            opacity: 0.5;
+            letter-spacing: 0.3em;
+            border-top: 1px solid rgba(44,44,44,0.06);
+        }
+
+        /* 竹叶装饰 */
+        .bamboo-leaf {
+            position: fixed;
+            opacity: 0.06;
+            pointer-events: none;
+            font-size: 6rem;
+            z-index: 0;
+        }
+        .b-leaf-1 { top: 15%; left: 3%; transform: rotate(-20deg); }
+        .b-leaf-2 { bottom: 20%; right: 2%; transform: rotate(150deg) scaleX(-1); }
+        .b-leaf-3 { top: 50%; right: 5%; transform: rotate(80deg); opacity: 0.04; }
+
+        @media (max-width: 500px) {
+            .container { padding: 2.5rem 1.2rem; }
+            .skills-grid { grid-template-columns: repeat(3, 1fr); }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 竹叶装饰 -->
+<div class="bamboo-leaf b-leaf-1">🎋</div>
+<div class="bamboo-leaf b-leaf-2">🎋</div>
+<div class="bamboo-leaf b-leaf-3">🎋</div>
+
+<!-- Hero -->
+<section class="hero">
+    <!-- 水墨远山 -->
+    <div class="mountain-bg">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="xMinYMax meet">
+            <path d="M0,180 C200,120 320,200 480,140 C560,110 640,160 720,110 C800,60 880,130 960,90 C1040,50 1120,100 1200,70 C1280,40 1360,80 1440,60 L1440,300 L0,300 Z" fill="currentColor"/>
+            <path d="M0,220 C240,160 400,240 600,180 C720,145 840,200 960,150 C1060,110 1160,170 1260,130 C1340,100 1400,140 1440,120 L1440,300 L0,300 Z" fill="currentColor" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <div class="seal">宏杰</div>
+    <h1>郭宏杰</h1>
+    <p class="subtitle">— 码上春秋 · 笔下乾坤 —</p>
+    <div class="divider-line"></div>
+    <div class="poem">
+        一入代码深似海<br>
+        万行文字写平生
+    </div>
+    <div class="scroll-hint">▼ 卷舒风云</div>
+</section>
+
+<div class="container">
+
+    <!-- 关于我 -->
+    <section>
+        <div class="section-title">
+            <span class="cn">自叙</span>
+            <span class="en">About</span>
+        </div>
+        <div class="about-text">
+            吾名 <strong>郭宏杰</strong>，一介码农，好技而笃行。<br>
+            以键盘为笔、屏幕为纸，于数字天地间耕耘不辍。<br>
+            嗜 Web 开发与效率工器，偶亦沉迷开源，以此为乐。
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section>
+        <div class="section-title">
+            <span class="cn">所能</span>
+            <span class="en">Skills</span>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">React</div>
+            <div class="skill-card">Node.js</div>
+            <div class="skill-card">TypeScript</div>
+            <div class="skill-card">CSS / UI</div>
+            <div class="skill-card">Python</div>
+            <div class="skill-card">PostgreSQL</div>
+            <div class="skill-card">Docker</div>
+            <div class="skill-card">Vercel</div>
+        </div>
+    </section>
+
+    <!-- 项目 -->
+    <section>
+        <div class="section-title">
+            <span class="cn">拙作</span>
+            <span class="en">Projects</span>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="corner"></div>
+                <h3>◈ 某项目</h3>
+                <p>此乃一小小工具，虽不足道，然尽心矣。</p>
+                <div class="tags"><span>React</span><span>Node</span><span>Mongo</span></div>
+            </div>
+            <div class="project-card">
+                <div class="corner"></div>
+                <h3>◈ 又一作</h3>
+                <p>集诸技之长，成一体之用，聊以自娱。</p>
+                <div class="tags"><span>Python</span><span>FastAPI</span><span>PG</span></div>
+            </div>
+            <div class="project-card">
+                <div class="corner"></div>
+                <h3>◈ 闲余之创</h3>
+                <p>闲暇时光所铸，志在精而不在多。</p>
+                <div class="tags"><span>TS</span><span>Next.js</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系 -->
+    <section>
+        <div class="section-title">
+            <span class="cn">投书</span>
+            <span class="en">Contact</span>
+        </div>
+        <div class="contact-grid">
+            <a href="#">✉ 电子信</a>
+            <a href="#">💬 微信</a>
+            <a href="#">🐦 飞鸟</a>
+            <a href="#">🐙 代码仓</a>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    甲辰 · 以笔墨耕心
+</footer>
+
+</body>
+</html>
